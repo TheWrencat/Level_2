@@ -15,10 +15,15 @@ public class JumpRunner {
 	
 	//Setup
 	void setup(){
+		frame.add(panel);
+		frame.addKeyListener(panel);
 		frame.setVisible(true);
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-		frame.addKeyListener(panel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		
+		//Keep this as last
+		panel.startGame();
 	}
 	
 	//Run (main method)
