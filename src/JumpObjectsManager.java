@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class JumpObjectsManager {
-	ArrayList<GameObject> objects;
+	ArrayList<JumpObjects> objects;
 
 	int score = 0;
 
@@ -12,16 +12,16 @@ public class JumpObjectsManager {
 	int enemySpawnTime = 1000;
 
 	public JumpObjectsManager() {
-		objects = new ArrayList<GameObject>();
+		objects = new ArrayList<JumpObjects>();
 	}
 
-	public void addObject(GameObject o) {
+	public void addObject(JumpObjects o) {
 		objects.add(o);
 	}
 
 	public void update() {
 		for (int i = 0; i < objects.size(); i++) {
-			GameObject o = objects.get(i);
+			JumpObjects o = objects.get(i);
 			o.update();
 		}
 
@@ -30,7 +30,7 @@ public class JumpObjectsManager {
 
 	public void draw(Graphics g) {
 		for (int i = 0; i < objects.size(); i++) {
-			GameObject o = objects.get(i);
+			JumpObjects o = objects.get(i);
 			o.draw(g);
 		}
 	}
@@ -53,8 +53,8 @@ public class JumpObjectsManager {
 	public void checkCollision() {
 		for (int i = 0; i < objects.size(); i++) {
 			for (int j = i + 1; j < objects.size(); j++) {
-				GameObject o1 = objects.get(i);
-				GameObject o2 = objects.get(j);
+				JumpObjects o1 = objects.get(i);
+				JumpObjects o2 = objects.get(j);
 
 				if (o1.collisionBox.intersects(o2.collisionBox)) {
 					if ((o1 instanceof Alien && o2 instanceof Projectile)
