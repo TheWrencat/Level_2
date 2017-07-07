@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +12,9 @@ import javax.swing.Timer;
 public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	// Member Variables
 	JumpObjects objects;
+	JumpPlayer player;
+	JumpObjectsManager manager;
+	Font titleFont;
 	// menu states
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
@@ -23,11 +27,13 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	JumpPanel() {
 		objects = new JumpObjects();
 		timer = new Timer(1000 / 60, this);
+		titleFont = new Font("Arial", Font.PLAIN, 48);
 
 	}
 
+	// Start Game
 	void startGame() {
-
+		player = new JumpPlayer(250, 700, 50, 50);
 		timer.start();
 
 	}
@@ -35,24 +41,27 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	// Draw States
 	void drawMenuState(Graphics g) {
 		g.setColor(Color.BLUE);
-		g.drawRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
-		// g.setColor(Color.WHITE);
-		// g.drawString("Jump", 70, 200);
-		// g.drawString("START GAME", 85, 250);
+		g.fillRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
+		g.setColor(Color.WHITE);
+		g.setFont(titleFont);
+		g.drawString("Jump", 180, 200);
+		g.drawString("START GAME", 85, 250);
 	}
 
 	void drawGameState(Graphics g) {
-		// g.setColor(Color.WHITE);
-		// g.drawRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
-
+		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
+		objects.draw(g);
+		player.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
-		// g.setColor(Color.RED);
-		// g.drawRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
-		// g.setColor(Color.WHITE);
-		// g.drawString("GAME OVER", 70, 200);
-		// g.drawString("RESTART", 85, 250);
+		g.setColor(Color.RED);
+		g.fillRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
+		g.setColor(Color.WHITE);
+		g.setFont(titleFont);
+		g.drawString("GAME OVER", 100, 200);
+		g.drawString("RESTART", 130, 250);
 	}
 
 	// Update States
@@ -61,7 +70,8 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-
+		objects.update();
+		player.update();
 	}
 
 	void updateEndState() {
@@ -70,7 +80,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 	// Paint
 	public void paintComponent(Graphics g) {
-		objects.draw(g);
+
 		if (currentState == MENU_STATE) {
 			drawMenuState(g);
 
@@ -114,13 +124,13 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			objects.left = true;
 		}
-		System.out.println("key pressed");
-		// if(e.getKeyCode() == KeyEvent.VK_ENTER){
-		// currentState++;
-		// if(currentState > END_STATE){
-		// currentState = MENU_STATE;
-		// }
-		// }
+
+		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+			currentState++;
+			if (currentState > END_STATE) {
+				currentState = MENU_STATE;
+			}
+		}
 	}
 
 	@Override

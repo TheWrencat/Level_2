@@ -1,12 +1,14 @@
+import java.awt.Color;
 import java.awt.Graphics;
 
 public class JumpObjects {
 	// Member variables
-	JumpPanel panel;
 	int x;
 	int y;
 	int width;
 	int height;
+
+	boolean isAlive;
 
 	boolean up;
 	boolean down;
@@ -14,7 +16,8 @@ public class JumpObjects {
 	boolean right;
 
 	JumpObjects() {
-		panel = new JumpPanel();
+		isAlive = true;
+
 	}
 
 	void update() {
@@ -35,6 +38,7 @@ public class JumpObjects {
 	}
 
 	void draw(Graphics g) {
+		g.setColor(Color.BLACK);
 		g.fillRect(x, y, 100, 100);
 	}
 
