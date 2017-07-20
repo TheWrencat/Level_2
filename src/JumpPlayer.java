@@ -2,18 +2,19 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class JumpPlayer extends JumpObjects {
-	int speed;
+	int xSpeed;
+	int ySpeed;
 
 	JumpPlayer(int x, int y, int width, int height) {
-		speed = 5;
-		this.x = x;
-		this.y = y;
-		this.width = width;
-		this.height = height;
+		super(x, y, width, height);
+		xSpeed = 0;
+		ySpeed = 0;
 
 	}
 
 	void update() {
+		x += xSpeed*4;
+		y += ySpeed*4;
 
 	}
 

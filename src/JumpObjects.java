@@ -1,5 +1,5 @@
-import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 public class JumpObjects {
 	// Member variables
@@ -7,39 +7,27 @@ public class JumpObjects {
 	int y;
 	int width;
 	int height;
+	boolean isAlive = true;
+	Rectangle collisionBox;
 
-	boolean isAlive;
-
-	boolean up;
-	boolean down;
-	boolean left;
-	boolean right;
-
-	JumpObjects() {
+	JumpObjects(int x, int y, int width, int height){
 		isAlive = true;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		collisionBox = new Rectangle(x, y, width, height);
 
 	}
 
 	void update() {
-		// collisionBox.setBounds(x, y, width, height);
-		if (up == true) {
-			y -= 5;
-		}
-		if (down == true) {
-			y += 5;
-		}
-		if (right == true) {
-			x += 5;
-		}
-		if (left == true) {
-			x -= 5;
-		}
+		 collisionBox.setBounds(x, y, width, height);
+		
 
 	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.BLACK);
-		g.fillRect(x, y, 100, 100);
+
 	}
 
 }

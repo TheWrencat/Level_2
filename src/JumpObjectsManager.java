@@ -45,7 +45,7 @@ public class JumpObjectsManager {
 
 	public void manageEnemies() {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
-			addObject(new Alien(new Random().nextInt(LeagueInvaders.FRAME_WIDTH), 0, 50, 50));
+			addObject(new Alien(new Random().nextInt(JumpRunner.FRAME_WIDTH), 0, 50, 50));
 			enemyTimer = System.currentTimeMillis();
 		}
 	}
@@ -57,14 +57,8 @@ public class JumpObjectsManager {
 				JumpObjects o2 = objects.get(j);
 
 				if (o1.collisionBox.intersects(o2.collisionBox)) {
-					if ((o1 instanceof Alien && o2 instanceof Projectile)
-							|| (o2 instanceof Alien && o1 instanceof Projectile)) {
-						score++;
-						System.out.println(score);
-						o1.isAlive = false;
-						o2.isAlive = false;
-					} else if ((o1 instanceof Alien && o2 instanceof Rocketship)
-							|| (o2 instanceof Alien && o1 instanceof Rocketship)) {
+					if ((o1 instanceof Alien && o2 instanceof JumpPlayer)
+							|| (o2 instanceof Alien && o1 instanceof JumpPlayer)) {
 						o1.isAlive = false;
 						o2.isAlive = false;
 					}

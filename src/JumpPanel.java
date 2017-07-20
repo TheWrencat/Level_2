@@ -25,15 +25,18 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 	// Constructor
 	JumpPanel() {
-		objects = new JumpObjects();
+		//objects = new JumpObjects();
+		player = new JumpPlayer(250, 700, 50, 50);
+		manager = new JumpObjectsManager();
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
+		
+		manager.addObject(player);
 
 	}
 
 	// Start Game
 	void startGame() {
-		player = new JumpPlayer(250, 700, 50, 50);
 		timer.start();
 
 	}
@@ -52,7 +55,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
 		objects.draw(g);
-		player.draw(g);
+		manager.draw(g);
 	}
 
 	void drawEndState(Graphics g) {
@@ -71,7 +74,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 		objects.update();
-		player.update();
+		manager.update();
 	}
 
 	void updateEndState() {
@@ -113,16 +116,16 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			objects.up = true;
+			player.ySpeed=+2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			objects.down = true;
+			player.ySpeed=-2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			objects.right = true;
+			player.xSpeed=-2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			objects.left = true;
+			player.xSpeed=-+2;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -136,16 +139,16 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			objects.up = false;
+			player.ySpeed=-2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			objects.down = false;
+			player.ySpeed=+2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			objects.right = false;
+			player.xSpeed=+2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			objects.left = false;
+			player.xSpeed=-2;
 		}
 
 	}
