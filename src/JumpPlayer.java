@@ -13,8 +13,8 @@ public class JumpPlayer extends JumpObjects {
 	}
 
 	void update() {
-		x += xSpeed*4;
-		y += ySpeed*4;
+		x += xSpeed * 4;
+		y += ySpeed * 4;
 
 	}
 

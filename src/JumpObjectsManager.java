@@ -45,7 +45,7 @@ public class JumpObjectsManager {
 
 	public void manageEnemies() {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
-			addObject(new Alien(new Random().nextInt(JumpRunner.FRAME_WIDTH), 0, 50, 50));
+			addObject(new JumpPlatforms(new Random().nextInt(JumpRunner.FRAME_WIDTH), 0, 50, 50));
 			enemyTimer = System.currentTimeMillis();
 		}
 	}
@@ -57,8 +57,8 @@ public class JumpObjectsManager {
 				JumpObjects o2 = objects.get(j);
 
 				if (o1.collisionBox.intersects(o2.collisionBox)) {
-					if ((o1 instanceof Alien && o2 instanceof JumpPlayer)
-							|| (o2 instanceof Alien && o1 instanceof JumpPlayer)) {
+					if ((o1 instanceof JumpPlatforms && o2 instanceof JumpPlayer)
+							|| (o2 instanceof JumpPlatforms && o1 instanceof JumpPlayer)) {
 						o1.isAlive = false;
 						o2.isAlive = false;
 					}

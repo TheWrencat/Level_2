@@ -25,12 +25,12 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 	// Constructor
 	JumpPanel() {
-		//objects = new JumpObjects();
+		// objects = new JumpObjects();
 		player = new JumpPlayer(250, 700, 50, 50);
 		manager = new JumpObjectsManager();
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
-		
+
 		manager.addObject(player);
 
 	}
@@ -54,7 +54,6 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	void drawGameState(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
-		objects.draw(g);
 		manager.draw(g);
 	}
 
@@ -73,8 +72,8 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void updateGameState() {
-		objects.update();
 		manager.update();
+		manager.manageEnemies();
 	}
 
 	void updateEndState() {
@@ -116,16 +115,16 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			player.ySpeed=+2;
+			player.ySpeed = -2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			player.ySpeed=-2;
+			player.ySpeed = +2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			player.xSpeed=-2;
+			player.xSpeed = +2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			player.xSpeed=-+2;
+			player.xSpeed = -2;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -139,16 +138,16 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			player.ySpeed=-2;
+			player.ySpeed = 0;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			player.ySpeed=+2;
+			player.ySpeed = 0;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			player.xSpeed=+2;
+			player.xSpeed = 0;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-			player.xSpeed=-2;
+			player.xSpeed = 0;
 		}
 
 	}
