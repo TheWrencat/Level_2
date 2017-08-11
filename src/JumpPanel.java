@@ -73,6 +73,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 	void updateGameState() {
 		manager.update();
+		manager.checkCollision();
 		manager.manageEnemies();
 	}
 
@@ -114,16 +115,14 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_UP) {
+		if (e.getKeyCode() == KeyEvent.VK_UP && !player.inAir) {
 			player.ySpeed = -2;
+			
 		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-			player.ySpeed = +2;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT && !player.inAir) {
 			player.xSpeed = +2;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+		if (e.getKeyCode() == KeyEvent.VK_LEFT && !player.inAir) {
 			player.xSpeed = -2;
 		}
 
@@ -138,9 +137,6 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyReleased(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
-			player.ySpeed = 0;
-		}
-		if (e.getKeyCode() == KeyEvent.VK_DOWN) {
 			player.ySpeed = 0;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {

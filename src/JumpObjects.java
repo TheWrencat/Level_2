@@ -21,7 +21,7 @@ public class JumpObjects {
 	}
 
 	void update() {
-		 collisionBox.setBounds(x, y, width, height);
+		 
 		
 
 	}

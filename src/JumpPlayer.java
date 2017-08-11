@@ -3,18 +3,33 @@ import java.awt.Graphics;
 
 public class JumpPlayer extends JumpObjects {
 	int xSpeed;
-	int ySpeed;
+	double ySpeed;
+	double yGravity;
+	boolean inAir;
 
 	JumpPlayer(int x, int y, int width, int height) {
 		super(x, y, width, height);
 		xSpeed = 0;
 		ySpeed = 0;
+		yGravity = .05;
+		inAir = false;
 
 	}
 
 	void update() {
-		x += xSpeed * 4;
-		y += ySpeed * 4;
+		collisionBox.setBounds(x, y, width, height);
+		x += xSpeed * 5;
+		y += ySpeed * 10;
+		ySpeed += yGravity;
+		if(y >= 700){
+			y = 700;
+			yGravity = 0;
+			inAir=false;
+		}else{
+			yGravity = .05;
+			inAir=true;
+			
+		}
 
 	}
 

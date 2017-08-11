@@ -59,8 +59,7 @@ public class JumpObjectsManager {
 				if (o1.collisionBox.intersects(o2.collisionBox)) {
 					if ((o1 instanceof JumpPlatforms && o2 instanceof JumpPlayer)
 							|| (o2 instanceof JumpPlatforms && o1 instanceof JumpPlayer)) {
-						o1.isAlive = false;
-						o2.isAlive = false;
+						System.out.println("pow");
 					}
 
 				}
