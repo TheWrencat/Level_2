@@ -5,6 +5,7 @@ import java.util.Random;
 
 public class JumpObjectsManager {
 	ArrayList<JumpObjects> objects;
+	ArrayList<JumpPlayer> players;
 
 	int score = 0;
 
@@ -13,10 +14,14 @@ public class JumpObjectsManager {
 
 	public JumpObjectsManager() {
 		objects = new ArrayList<JumpObjects>();
+		players = new ArrayList<JumpPlayer>();
 	}
 
 	public void addObject(JumpObjects o) {
 		objects.add(o);
+	}
+	public void addPlayers(JumpPlayer p) {
+		players.add(p);
 	}
 
 	public void update() {
@@ -24,14 +29,24 @@ public class JumpObjectsManager {
 			JumpObjects o = objects.get(i);
 			o.update();
 		}
+		for (int j = 0; j < players.size(); j++) {
+			JumpPlayer p = players.get(j);
+			p.update();
+		}
+
 
 		purgeObjects();
+		
 	}
 
 	public void draw(Graphics g) {
 		for (int i = 0; i < objects.size(); i++) {
 			JumpObjects o = objects.get(i);
 			o.draw(g);
+		}
+		for (int j = 0; j < players.size(); j++) {
+			JumpPlayer p = players.get(j);
+			p.draw(g);
 		}
 	}
 
@@ -40,6 +55,7 @@ public class JumpObjectsManager {
 			if (!objects.get(i).isAlive) {
 				objects.remove(i);
 			}
+
 		}
 	}
 
@@ -51,21 +67,23 @@ public class JumpObjectsManager {
 	}
 
 	public void checkCollision() {
-		for (int i = 0; i < objects.size(); i++) {
-			for (int j = i + 1; j < objects.size(); j++) {
-				JumpObjects o1 = objects.get(i);
-				JumpObjects o2 = objects.get(j);
-
-				if (o1.collisionBox.intersects(o2.collisionBox)) {
-					if ((o1 instanceof JumpPlatforms && o2 instanceof JumpPlayer)
-							|| (o2 instanceof JumpPlatforms && o1 instanceof JumpPlayer)) {
-						System.out.println("pow");
-					}
-
+		for (int i = 0; i < players.size(); i++) {
+			JumpPlayer player = players.get(i);
+			
+		for (int j = 0; j < objects.size(); j++) {
+			JumpPlatforms platform = (JumpPlatforms) objects.get(i);
+			if( player.y < platform.y) {
+				if(player.y == platform.y + 1) {
+					player.yGravity = 0;
+					player.inAir = false;
+					
 				}
 			}
+				
+			}
 		}
-	}
+		}
+	
 
 	public int getScore() {
 		return score;

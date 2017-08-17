@@ -12,6 +12,8 @@ public class JumpPlatforms extends JumpObjects {
 	void update() {
 		collisionBox.setBounds(x, y, width *2, height/10);
 		
+		
+		
 		y += ySpeed;
 
 	}
