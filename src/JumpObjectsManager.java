@@ -73,6 +73,7 @@ public class JumpObjectsManager {
 		for (int j = 0; j < objects.size(); j++) {
 			JumpPlatforms platform = (JumpPlatforms) objects.get(i);
 			if( player.y < platform.y) {
+				//Y speed negative = going up
 				if(player.y == platform.y + 1) {
 					player.yGravity = 0;
 					player.inAir = false;
