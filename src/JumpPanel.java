@@ -27,11 +27,13 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	JumpPanel() {
 		// objects = new JumpObjects();
 		player = new JumpPlayer(250, 700, 50, 50);
+		
 		manager = new JumpObjectsManager();
+		
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 
-		manager.addObject(player);
+		manager.addPlayers(player);
 
 	}
 
@@ -117,7 +119,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_UP && !player.inAir) {
 			player.ySpeed = -2;
-			
+			player.inAir = true;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT && !player.inAir) {
 			player.xSpeed = +2;

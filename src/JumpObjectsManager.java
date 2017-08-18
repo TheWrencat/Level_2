@@ -33,7 +33,8 @@ public class JumpObjectsManager {
 			JumpPlayer p = players.get(j);
 			p.update();
 		}
-
+		
+		
 
 		purgeObjects();
 		
@@ -60,30 +61,32 @@ public class JumpObjectsManager {
 	}
 
 	public void manageEnemies() {
-		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime) {
+		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime*2) {
 			addObject(new JumpPlatforms(new Random().nextInt(JumpRunner.FRAME_WIDTH), 0, 50, 50));
 			enemyTimer = System.currentTimeMillis();
 		}
 	}
 
 	public void checkCollision() {
-		for (int i = 0; i < players.size(); i++) {
-			JumpPlayer player = players.get(i);
+	
 			
-		for (int j = 0; j < objects.size(); j++) {
-			JumpPlatforms platform = (JumpPlatforms) objects.get(i);
-			if( player.y < platform.y) {
-				//Y speed negative = going up
-				if(player.y == platform.y + 1) {
-					player.yGravity = 0;
+		for (int j = 0; j < objects.size(); j++) {	
+			JumpPlayer player = players.get(0);
+
+			JumpPlatforms platform = (JumpPlatforms) objects.get(j);
+			if( player.ySpeed >= 0 ) {
+				
+				if(player.collisionBox.intersects( platform.collisionBox)) {
 					player.inAir = false;
+					player.yGravity = 0;
+					player.ySpeed = 0;
 					
 				}
 			}
 				
 			}
 		}
-		}
+		
 	
 
 	public int getScore() {
