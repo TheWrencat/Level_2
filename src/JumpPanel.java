@@ -118,13 +118,14 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	@Override
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_UP && !player.inAir) {
+			player.y -= 2;
 			player.ySpeed = -2;
 			player.inAir = true;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_RIGHT && !player.inAir) {
+		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			player.xSpeed = +2;
 		}
-		if (e.getKeyCode() == KeyEvent.VK_LEFT && !player.inAir) {
+		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			player.xSpeed = -2;
 		}
 

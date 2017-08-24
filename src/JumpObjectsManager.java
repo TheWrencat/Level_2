@@ -20,6 +20,7 @@ public class JumpObjectsManager {
 	public void addObject(JumpObjects o) {
 		objects.add(o);
 	}
+
 	public void addPlayers(JumpPlayer p) {
 		players.add(p);
 	}
@@ -33,11 +34,9 @@ public class JumpObjectsManager {
 			JumpPlayer p = players.get(j);
 			p.update();
 		}
-		
-		
 
 		purgeObjects();
-		
+
 	}
 
 	public void draw(Graphics g) {
@@ -61,33 +60,34 @@ public class JumpObjectsManager {
 	}
 
 	public void manageEnemies() {
-		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime*2) {
+		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime * 2) {
 			addObject(new JumpPlatforms(new Random().nextInt(JumpRunner.FRAME_WIDTH), 0, 50, 50));
 			enemyTimer = System.currentTimeMillis();
 		}
 	}
 
 	public void checkCollision() {
-	
-			
-		for (int j = 0; j < objects.size(); j++) {	
+
+		boolean f = false;
+		for (int j = 0; j < objects.size(); j++) {
 			JumpPlayer player = players.get(0);
 
 			JumpPlatforms platform = (JumpPlatforms) objects.get(j);
-			if( player.ySpeed >= 0 ) {
+			if (player.ySpeed >= 0) {
+
+				if (player.collisionBox.intersects(platform.collisionBox)) {
+					f = true;
+					player.setPlatform(platform);
 				
-				if(player.collisionBox.intersects( platform.collisionBox)) {
-					player.inAir = false;
-					player.yGravity = 0;
-					player.ySpeed = 0;
-					
+
 				}
 			}
-				
-			}
+
 		}
-		
-	
+		if(!f) {
+			players.get(0).setPlatform(null);;
+		}
+	}
 
 	public int getScore() {
 		return score;

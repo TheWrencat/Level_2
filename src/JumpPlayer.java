@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class JumpPlayer extends JumpObjects {
+	JumpPlatforms platform;
 	int xSpeed;
 	double ySpeed;
 	double yGravity;
@@ -13,24 +14,42 @@ public class JumpPlayer extends JumpObjects {
 		ySpeed = 0;
 		yGravity = .05;
 		inAir = false;
+		
 
 	}
 
 	void update() {
 		collisionBox.setBounds(x, y, width, height);
+		//Player speed
 		x += xSpeed * 5;
-		y += ySpeed * 10;
-		ySpeed += yGravity;
-		if(y >= 700){
-			y = 700;
-			yGravity = 0;
+		
+		//inAir rules
+		//On Platform
+		if(platform != null) {
+			y = platform.y - height+1;
 			inAir=false;
-		}else{
-			yGravity = .05;
-			inAir=true;
+		}else {
+			y += ySpeed * 10;
 			
 		}
+		
+		//On ground
+		if(y >= 700 ){
+			y = 700;
+			
+			inAir=false;
+		}	else{
+		ySpeed += yGravity;
+			//yGravity = .05;
+			//inAir=true;	
+		}
+		
+		
 
+	}
+	
+	void setPlatform(JumpPlatforms p) {
+		platform = p;
 	}
 
 	void draw(Graphics g) {
