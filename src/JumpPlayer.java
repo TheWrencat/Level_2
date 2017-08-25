@@ -33,12 +33,21 @@ public class JumpPlayer extends JumpObjects {
 			
 		}
 		
+		//hitting wall
+		if(x <= 1) {
+			x = 1;
+			xSpeed = -xSpeed;
+		}
+		if (x >= 500){
+			x = 500;
+			xSpeed = -xSpeed;
+		}
 		//On ground
 		if(y >= 700 ){
 			y = 700;
 			
 			inAir=false;
-		}	else{
+		} 	else{
 		ySpeed += yGravity;
 			//yGravity = .05;
 			//inAir=true;	
