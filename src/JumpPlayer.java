@@ -7,6 +7,8 @@ public class JumpPlayer extends JumpObjects {
 	double ySpeed;
 	double yGravity;
 	boolean inAir;
+	boolean startSafe;
+	
 
 	JumpPlayer(int x, int y, int width, int height) {
 		super(x, y, width, height);
@@ -14,6 +16,10 @@ public class JumpPlayer extends JumpObjects {
 		ySpeed = 0;
 		yGravity = .05;
 		inAir = false;
+		startSafe = true;
+		
+		//False when on ground
+		
 		
 
 	}
@@ -24,12 +30,13 @@ public class JumpPlayer extends JumpObjects {
 		x += xSpeed * 5;
 		
 		//inAir rules
-		//On Platform
+		//The base of the interactions with the platform and the player so it's really important or something
 		if(platform != null) {
 			y = platform.y - height+1;
 			inAir=false;
 		}else {
-			y += ySpeed * 10;
+			//Player speed control
+			y += ySpeed * 5;
 			
 		}
 		
@@ -43,14 +50,18 @@ public class JumpPlayer extends JumpObjects {
 			xSpeed = -xSpeed;
 		}
 		//On ground
-		if(y >= 700 ){
+		if(y >= 700 && startSafe){
 			y = 700;
 			
 			inAir=false;
 		} 	else{
 		ySpeed += yGravity;
+		
 			//yGravity = .05;
 			//inAir=true;	
+		}
+		if(y >= 750) {
+			isAlive = false;
 		}
 		
 		

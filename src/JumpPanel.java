@@ -99,6 +99,9 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	// Switch States
 	public void actionPerformed(ActionEvent e) {
 		repaint();
+		if(!player.isAlive) {
+			currentState = END_STATE;
+		}
 		if (currentState == MENU_STATE) {
 			updateMenuState();
 		} else if (currentState == GAME_STATE) {

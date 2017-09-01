@@ -78,6 +78,7 @@ public class JumpObjectsManager {
 				if (player.collisionBox.intersects(platform.collisionBox)) {
 					f = true;
 					player.setPlatform(platform);
+					player.startSafe = false;
 				
 
 				}
@@ -85,7 +86,10 @@ public class JumpObjectsManager {
 
 		}
 		if(!f) {
-			players.get(0).setPlatform(null);;
+			players.get(0).setPlatform(null);
+			if(players.get(0).y < 700 ) {
+			players.get(0).inAir = true;
+			}
 		}
 	}
 

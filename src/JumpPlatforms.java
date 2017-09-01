@@ -15,7 +15,11 @@ public class JumpPlatforms extends JumpObjects {
 		
 		
 		y += ySpeed;
-
+		
+		
+		if(y >= 750) {
+			isAlive = false;
+		}
 	}
 
 	void draw(Graphics g) {
