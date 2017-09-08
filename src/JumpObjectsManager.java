@@ -67,28 +67,63 @@ public class JumpObjectsManager {
 	}
 
 	public void checkCollision() {
+		JumpPlayer player = players.get(0);
+		JumpPlayer playerTwo = players.get(1);
 
-		boolean f = false;
+		if (player.collisionBox.intersects(playerTwo.collisionBox)) {
+
+			if(player.x > playerTwo.x){
+			player.x += 5;
+			playerTwo.x += -5;
+			}else{
+				player.x += -5;
+				playerTwo.x += 5;
+			}
+
+		}
+
+		boolean one = false;
+		boolean two = false;
 		for (int j = 0; j < objects.size(); j++) {
-			JumpPlayer player = players.get(0);
 
 			JumpPlatforms platform = (JumpPlatforms) objects.get(j);
+			// Player One
 			if (player.ySpeed >= 0) {
 
 				if (player.collisionBox.intersects(platform.collisionBox)) {
-					f = true;
+					one = true;
 					player.setPlatform(platform);
 					player.startSafe = false;
-				
 
 				}
 			}
 
+			// Player Two
+			if (playerTwo.ySpeed >= 0) {
+
+				if (playerTwo.collisionBox.intersects(platform.collisionBox)) {
+					two = true;
+					playerTwo.setPlatform(platform);
+					playerTwo.startSafe = false;
+
+				}
+
+			}
+
 		}
-		if(!f) {
+		// Player One
+		if (!one) {
 			players.get(0).setPlatform(null);
-			if(players.get(0).y < 700 ) {
-			players.get(0).inAir = true;
+			if (players.get(0).y < 700) {
+				players.get(0).inAir = true;
+			}
+		}
+
+		// Player Two
+		if (!two) {
+			players.get(1).setPlatform(null);
+			if (players.get(1).y < 700) {
+				players.get(1).inAir = true;
 			}
 		}
 	}
