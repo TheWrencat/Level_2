@@ -29,9 +29,9 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		// objects = new JumpObjects();
 		player = new JumpPlayer(300, 700, 50, 50, Color.PINK);
 		playerTwo = new JumpPlayer(200, 700, 50, 50, Color.ORANGE);
-		
+
 		manager = new JumpObjectsManager();
-		
+
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
 
@@ -63,7 +63,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	}
 
 	void drawEndState(Graphics g) {
-		
+
 		g.setColor(Color.RED);
 		g.fillRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
 		g.setColor(Color.WHITE);
@@ -81,10 +81,12 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		manager.update();
 		manager.checkCollision();
 		manager.manageEnemies();
+		//reset
+		//WRITE IT
 	}
 
 	void updateEndState() {
-		player.isAlive = true;
+
 	}
 
 	// Paint
@@ -103,7 +105,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	// Switch States
 	public void actionPerformed(ActionEvent e) {
 		repaint();
-		if(!player.isAlive || !playerTwo.isAlive) {
+		if (!player.isAlive || !playerTwo.isAlive) {
 			currentState = END_STATE;
 		}
 		if (currentState == MENU_STATE) {
@@ -124,8 +126,8 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyPressed(KeyEvent e) {
-		
-		//Player One Controls
+
+		// Player One Controls
 		if (e.getKeyCode() == KeyEvent.VK_UP && !player.inAir) {
 			player.y -= 2;
 			player.ySpeed = -2;
@@ -137,8 +139,8 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			player.xSpeed = -2;
 		}
-		
-		//Player Two Controls
+
+		// Player Two Controls
 		if (e.getKeyCode() == KeyEvent.VK_W && !playerTwo.inAir) {
 			playerTwo.y -= 2;
 			playerTwo.ySpeed = -2;
@@ -161,7 +163,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		//Player one stopping
+		// Player one stopping
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			player.ySpeed = 0;
 		}
@@ -172,7 +174,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 			player.xSpeed = 0;
 		}
 
-		//Player two stopping
+		// Player two stopping
 		if (e.getKeyCode() == KeyEvent.VK_W) {
 			playerTwo.ySpeed = 0;
 		}
