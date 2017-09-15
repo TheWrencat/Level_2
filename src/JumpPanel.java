@@ -16,11 +16,13 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	JumpPlayer playerTwo;
 	JumpObjectsManager manager;
 	Font titleFont;
+	Font subFont;
 	// menu states
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
+	int whoDied = 0;
 	// timer
 	Timer timer;
 
@@ -34,9 +36,12 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
+		subFont = new Font("Arial", Font.PLAIN, 24);
 
 		manager.addPlayers(player);
 		manager.addPlayers(playerTwo);
+		
+		
 
 	}
 
@@ -48,28 +53,42 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 	// Draw States
 	void drawMenuState(Graphics g) {
-		g.setColor(Color.BLUE);
-		g.fillRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
 		g.setColor(Color.WHITE);
+		g.fillRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
+		g.setColor(Color.GRAY);
 		g.setFont(titleFont);
 		g.drawString("Jump", 180, 200);
 		g.drawString("START GAME", 85, 250);
+		g.setColor(Color.PINK);
+		g.fillRect(300, 700, 50, 50);
+		g.setColor(Color.ORANGE);
+		g.fillRect(200, 700, 50, 50);
 	}
 
 	void drawGameState(Graphics g) {
 		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
+		g.setFont(subFont);
+		g.setColor(Color.PINK);
+		g.drawString("Player One:"+ manager.scoreOne + " ", 1, 24);
+		g.setColor(Color.ORANGE);
+		g.drawString("Player Two:"+ manager.scoreTwo + " ", 1, 48);
 		manager.draw(g);
+		
 	}
 
 	void drawEndState(Graphics g) {
-
-		g.setColor(Color.RED);
+		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
 		g.setColor(Color.WHITE);
 		g.setFont(titleFont);
 		g.drawString("GAME OVER", 100, 200);
-		g.drawString("RESTART", 130, 250);
+		g.setFont(subFont);
+		if(whoDied == 1) {
+			g.drawString("SORRY, PLAYER ONE.", 120, 250);
+		}else if(whoDied == 2) {
+			g.drawString("SORRY, PLAYER TWO.", 120, 250);
+		}
 	}
 
 	// Update States
@@ -81,12 +100,27 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		manager.update();
 		manager.checkCollision();
 		manager.manageEnemies();
-		//reset
-		//WRITE IT
+		
 	}
 
 	void updateEndState() {
-
+		//reset
+		
+		if(!player.isAlive) {
+			whoDied = 1;
+		}else if(!playerTwo.isAlive) {
+			whoDied = 2;
+		}
+		
+		player.isAlive = false;
+		playerTwo.isAlive = false;
+		manager.update();
+		player = new JumpPlayer(300, 700, 50, 50, Color.PINK);
+		playerTwo = new JumpPlayer(200, 700, 50, 50, Color.ORANGE);
+		manager.reset();
+		manager.addPlayers(player);
+		manager.addPlayers(playerTwo);
+		
 	}
 
 	// Paint
@@ -106,7 +140,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	public void actionPerformed(ActionEvent e) {
 		repaint();
 		if (!player.isAlive || !playerTwo.isAlive) {
-			currentState = END_STATE;
+			currentState = 2;
 		}
 		if (currentState == MENU_STATE) {
 			updateMenuState();
@@ -153,7 +187,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 			playerTwo.xSpeed = -2;
 		}
 
-		if (e.getKeyCode() == KeyEvent.VK_ENTER) {
+		if (e.getKeyCode() == KeyEvent.VK_ENTER && currentState != GAME_STATE) {
 			currentState++;
 			if (currentState > END_STATE) {
 				currentState = MENU_STATE;

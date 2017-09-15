@@ -7,7 +7,8 @@ public class JumpObjectsManager {
 	ArrayList<JumpObjects> objects;
 	ArrayList<JumpPlayer> players;
 
-	int score = 0;
+	int scoreOne = 0;
+	int scoreTwo = 0;
 
 	long enemyTimer = 0;
 	int enemySpawnTime = 1000;
@@ -57,6 +58,13 @@ public class JumpObjectsManager {
 			}
 
 		}
+
+		for (int i = 0; i < players.size(); i++) {
+			if (!players.get(i).isAlive) {
+				players.remove(i);
+			}
+
+		}
 	}
 
 	public void manageEnemies() {
@@ -67,15 +75,18 @@ public class JumpObjectsManager {
 	}
 
 	public void checkCollision() {
+		if (players.size() < 2) {
+			return;
+		}
 		JumpPlayer player = players.get(0);
 		JumpPlayer playerTwo = players.get(1);
 
 		if (player.collisionBox.intersects(playerTwo.collisionBox)) {
 
-			if(player.x > playerTwo.x){
-			player.x += 5;
-			playerTwo.x += -5;
-			}else{
+			if (player.x > playerTwo.x) {
+				player.x += 5;
+				playerTwo.x += -5;
+			} else {
 				player.x += -5;
 				playerTwo.x += 5;
 			}
@@ -94,6 +105,12 @@ public class JumpObjectsManager {
 					one = true;
 					player.setPlatform(platform);
 					player.startSafe = false;
+					if (!platform.jumpedOne) {
+						platform.jumpedOne = true;
+						scoreOne++;
+						System.out.println(scoreOne);
+					}
+					
 
 				}
 			}
@@ -105,6 +122,11 @@ public class JumpObjectsManager {
 					two = true;
 					playerTwo.setPlatform(platform);
 					playerTwo.startSafe = false;
+					if(!platform.jumpedTwo) {
+					platform.jumpedTwo = true;
+					scoreTwo++;
+					System.out.println(scoreTwo);
+					}
 
 				}
 
@@ -128,15 +150,28 @@ public class JumpObjectsManager {
 		}
 	}
 
-	public int getScore() {
-		return score;
+	public int getScoreOne() {
+		return scoreOne;
+
 	}
 
-	public void setScore(int s) {
-		score = s;
+	public int getScoreTwo() {
+		return scoreTwo;
+
+	}
+
+	public void setScoreOne(int s) {
+		scoreOne = s;
+	}
+
+	public void setScoreTwo(int s) {
+		scoreTwo = s;
 	}
 
 	public void reset() {
 		objects.clear();
+		players.clear();
+		scoreOne = 0;
+		scoreTwo = 0;
 	}
 }
