@@ -5,7 +5,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -15,8 +18,11 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	JumpPlayer player;
 	JumpPlayer playerTwo;
 	JumpObjectsManager manager;
+	public static BufferedImage TwoTest;
 	Font titleFont;
 	Font subFont;
+	int saveScoreOne;
+	int saveScoreTwo;
 	// menu states
 	final int MENU_STATE = 0;
 	final int GAME_STATE = 1;
@@ -33,6 +39,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		playerTwo = new JumpPlayer(200, 700, 50, 50, Color.ORANGE);
 
 		manager = new JumpObjectsManager();
+		
 
 		timer = new Timer(1000 / 60, this);
 		titleFont = new Font("Arial", Font.PLAIN, 48);
@@ -40,6 +47,15 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 		manager.addPlayers(player);
 		manager.addPlayers(playerTwo);
+		try {
+			TwoTest = ImageIO.read(this.getClass().getResourceAsStream("PinkTemp.png"));
+//			rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
+//			bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
+//			spaceImg = ImageIO.read(this.getClass().getResourceAsStream("space.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		
 
@@ -60,9 +76,10 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("Jump", 180, 200);
 		g.drawString("START GAME", 85, 250);
 		g.setColor(Color.PINK);
-		g.fillRect(300, 700, 50, 50);
+		
+		g.drawImage(TwoTest, 300, 700, 50, 50, null);
 		g.setColor(Color.ORANGE);
-		g.fillRect(200, 700, 50, 50);
+		g.drawImage(TwoTest, 200, 700, 50, 50, null);
 	}
 
 	void drawGameState(Graphics g) {
@@ -89,6 +106,12 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		}else if(whoDied == 2) {
 			g.drawString("SORRY, PLAYER TWO.", 120, 250);
 		}
+		g.setColor(Color.WHITE);
+		g.fillRect( 120, 280, 250, 80);
+		g.setColor(Color.PINK);
+		g.drawString("PLAYER ONE: " + saveScoreOne, 130, 310);
+		g.setColor(Color.ORANGE);
+		g.drawString("PLAYER TWO: " + saveScoreTwo, 130, 340);
 	}
 
 	// Update States
@@ -111,6 +134,12 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		}else if(!playerTwo.isAlive) {
 			whoDied = 2;
 		}
+		if(!player.isAlive || !playerTwo.isAlive) {
+			saveScoreOne = manager.scoreOne;
+			saveScoreTwo = manager.scoreTwo;
+		}
+		
+		
 		
 		player.isAlive = false;
 		playerTwo.isAlive = false;

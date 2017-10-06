@@ -70,7 +70,7 @@ public class JumpPlayer extends JumpObjects {
 
 	void draw(Graphics g) {
 		g.setColor(playerColor);
-		g.fillRect(x, y, width, height);
+		g.drawImage(JumpPanel.TwoTest, x, y, width, height, null);
 
 	}
 }
