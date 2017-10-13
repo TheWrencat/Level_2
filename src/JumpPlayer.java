@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class JumpPlayer extends JumpObjects {
+	JumpAnimation walk = new JumpAnimation();
 	JumpPlatforms platform;
 	int xSpeed;
 	double ySpeed;
@@ -9,6 +10,8 @@ public class JumpPlayer extends JumpObjects {
 	boolean inAir;
 	boolean startSafe;
 	Color playerColor;
+	
+	
 
 	JumpPlayer(int x, int y, int width, int height, Color playerColor) {
 		super(x, y, width, height);
@@ -18,12 +21,17 @@ public class JumpPlayer extends JumpObjects {
 		yGravity = .05;
 		inAir = false;
 		startSafe = true;
+		walk.loadImage("JumpSpriteRight.png");
+		walk.loadImage("jumpSpriteLeft.png");
+		
+		walk.setFrameDelay(100);
 
 		// False when on ground
 
 	}
 
 	void update() {
+		walk.update();
 		collisionBox.setBounds(x, y, width, height);
 		// Player speed
 		x += xSpeed * 5;
@@ -70,7 +78,8 @@ public class JumpPlayer extends JumpObjects {
 
 	void draw(Graphics g) {
 		g.setColor(playerColor);
-		g.drawImage(JumpPanel.TwoTest, x, y, width, height, null);
+		//How to draw?
+		g.drawImage(walk.currentImage, x, y, width, height, null);
 
 	}
 }

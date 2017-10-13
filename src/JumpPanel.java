@@ -18,7 +18,8 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	JumpPlayer player;
 	JumpPlayer playerTwo;
 	JumpObjectsManager manager;
-	public static BufferedImage TwoTest;
+	String imagePickerOne;
+	String imagePickerTwo;
 	Font titleFont;
 	Font subFont;
 	int saveScoreOne;
@@ -47,16 +48,6 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 		manager.addPlayers(player);
 		manager.addPlayers(playerTwo);
-		try {
-			TwoTest = ImageIO.read(this.getClass().getResourceAsStream("PinkTemp.png"));
-//			rocketImg = ImageIO.read(this.getClass().getResourceAsStream("rocket.png"));
-//			bulletImg = ImageIO.read(this.getClass().getResourceAsStream("bullet.png"));
-//			spaceImg = ImageIO.read(this.getClass().getResourceAsStream("space.png"));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
 		
 
 	}
@@ -77,9 +68,9 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		g.drawString("START GAME", 85, 250);
 		g.setColor(Color.PINK);
 		
-		g.drawImage(TwoTest, 300, 700, 50, 50, null);
+		//g.drawImage(TwoTest, 300, 700, 50, 50, null);
 		g.setColor(Color.ORANGE);
-		g.drawImage(TwoTest, 200, 700, 50, 50, null);
+		//g.drawImage(walk.currentImage, 200, 700, 50, 50, null);
 	}
 
 	void drawGameState(Graphics g) {
@@ -91,6 +82,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		g.setColor(Color.ORANGE);
 		g.drawString("Player Two:"+ manager.scoreTwo + " ", 1, 48);
 		manager.draw(g);
+		
 		
 	}
 
@@ -201,6 +193,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			player.xSpeed = -2;
+			//imagePickerOne = "JumpSpriteLeft.png"
 		}
 
 		// Player Two Controls
