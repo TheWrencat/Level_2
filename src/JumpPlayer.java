@@ -2,7 +2,10 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class JumpPlayer extends JumpObjects {
-	JumpAnimation walk = new JumpAnimation();
+	JumpAnimation walkLeft = new JumpAnimation();
+	JumpAnimation walkRight = new JumpAnimation();
+	JumpAnimation stand = new JumpAnimation();
+	
 	JumpPlatforms platform;
 	int xSpeed;
 	double ySpeed;
@@ -10,6 +13,9 @@ public class JumpPlayer extends JumpObjects {
 	boolean inAir;
 	boolean startSafe;
 	Color playerColor;
+	
+	//Animation Set
+		int animationSetOne = 0;
 	
 	
 
@@ -21,17 +27,33 @@ public class JumpPlayer extends JumpObjects {
 		yGravity = .05;
 		inAir = false;
 		startSafe = true;
-		walk.loadImage("JumpSpriteRight.png");
-		walk.loadImage("jumpSpriteLeft.png");
+		if(playerColor == Color.PINK) {
+		stand.loadImage("JumpSpriteStand.png");
 		
-		walk.setFrameDelay(100);
+		walkRight.loadImage("JumpSpriteRight.png");
+		
+		walkLeft.loadImage("JumpSpriteLeft.png");
+		}
+		if(playerColor == Color.ORANGE) {
+			stand.loadImage("JumpSpriteStandTwo.png");
+			
+			walkRight.loadImage("JumpSpriteRightTwo.png");
+			
+			walkLeft.loadImage("JumpSpriteLeftTwo.png");
+			}
+		
 
 		// False when on ground
 
 	}
 
 	void update() {
-		walk.update();
+		stand.update();
+		walkRight.update();
+		walkLeft.update();
+		
+		
+		
 		collisionBox.setBounds(x, y, width, height);
 		// Player speed
 		x += xSpeed * 5;
@@ -79,7 +101,16 @@ public class JumpPlayer extends JumpObjects {
 	void draw(Graphics g) {
 		g.setColor(playerColor);
 		//How to draw?
-		g.drawImage(walk.currentImage, x, y, width, height, null);
-
+		
+		if(animationSetOne == 0) {
+			g.drawImage(stand.currentImage, x, y, width, height, null);
+		}else if(animationSetOne == 1) {
+			g.drawImage(stand.currentImage, x, y, width, height, null);
+		}else if(animationSetOne == 2) {
+			g.drawImage(walkRight.currentImage, x, y, width, height, null);
+		}else if(animationSetOne == 3) {
+			g.drawImage(walkLeft.currentImage, x, y, width, height, null);
+		}
+		
 	}
 }

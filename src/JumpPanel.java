@@ -32,7 +32,9 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	int whoDied = 0;
 	// timer
 	Timer timer;
-
+	
+	
+	
 	// Constructor
 	JumpPanel() {
 		// objects = new JumpObjects();
@@ -187,12 +189,15 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 			player.y -= 2;
 			player.ySpeed = -2;
 			player.inAir = true;
+			player.animationSetOne = 1;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			player.xSpeed = +2;
+			player.animationSetOne = 2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			player.xSpeed = -2;
+			player.animationSetOne = 3;
 			//imagePickerOne = "JumpSpriteLeft.png"
 		}
 
@@ -201,12 +206,15 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 			playerTwo.y -= 2;
 			playerTwo.ySpeed = -2;
 			playerTwo.inAir = true;
+			playerTwo.animationSetOne = 1;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_D) {
 			playerTwo.xSpeed = +2;
+			playerTwo.animationSetOne = 2;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_A) {
 			playerTwo.xSpeed = -2;
+			playerTwo.animationSetOne = 3;
 		}
 
 		if (e.getKeyCode() == KeyEvent.VK_ENTER && currentState != GAME_STATE) {
@@ -222,23 +230,29 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		// Player one stopping
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			player.ySpeed = 0;
+			player.animationSetOne = 0;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			player.xSpeed = 0;
+			player.animationSetOne = 0;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_LEFT) {
 			player.xSpeed = 0;
+			player.animationSetOne = 0;
 		}
 
 		// Player two stopping
 		if (e.getKeyCode() == KeyEvent.VK_W) {
 			playerTwo.ySpeed = 0;
+			playerTwo.animationSetOne = 0;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_D) {
 			playerTwo.xSpeed = 0;
+			playerTwo.animationSetOne = 0;
 		}
 		if (e.getKeyCode() == KeyEvent.VK_A) {
 			playerTwo.xSpeed = 0;
+			playerTwo.animationSetOne = 0;
 		}
 	}
 

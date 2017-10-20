@@ -5,15 +5,17 @@ public class JumpPlatforms extends JumpObjects {
 	int ySpeed = 1;
 	boolean jumpedOne = false;
 	boolean jumpedTwo = false;
+	JumpAnimation Platform = new JumpAnimation();
 
 	JumpPlatforms(int x, int y, int width, int height) {
 		super(x, y, width, height);
+		Platform.loadImage("Platform.png");
 
 	}
 
 	void update() {
 		collisionBox.setBounds(x, y, width * 2, height / 10);
-
+		Platform.update();
 		y += ySpeed;
 
 		if (y >= 750) {
@@ -22,8 +24,7 @@ public class JumpPlatforms extends JumpObjects {
 	}
 
 	void draw(Graphics g) {
-		g.setColor(Color.GRAY);
-		g.fillRect(x, y, width * 2, height / 2);
+		g.drawImage(Platform.currentImage, x, y, width, height, null);
 	}
 
 }
