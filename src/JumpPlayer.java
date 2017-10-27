@@ -60,7 +60,7 @@ public class JumpPlayer extends JumpObjects {
 		
 		
 		
-		collisionBox.setBounds(x, y, width, height);
+		collisionBox.setBounds(x, y, width, height/2 + 25);
 		// Player speed
 		x += xSpeed * 5;
 
