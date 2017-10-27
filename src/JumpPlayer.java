@@ -5,6 +5,7 @@ public class JumpPlayer extends JumpObjects {
 	JumpAnimation walkLeft = new JumpAnimation();
 	JumpAnimation walkRight = new JumpAnimation();
 	JumpAnimation stand = new JumpAnimation();
+	JumpAnimation jump = new JumpAnimation();
 	
 	JumpPlatforms platform;
 	int xSpeed;
@@ -33,6 +34,8 @@ public class JumpPlayer extends JumpObjects {
 		walkRight.loadImage("JumpSpriteRight.png");
 		
 		walkLeft.loadImage("JumpSpriteLeft.png");
+		
+		jump.loadImage("JumpSpriteJump.png");
 		}
 		if(playerColor == Color.ORANGE) {
 			stand.loadImage("JumpSpriteStandTwo.png");
@@ -40,6 +43,8 @@ public class JumpPlayer extends JumpObjects {
 			walkRight.loadImage("JumpSpriteRightTwo.png");
 			
 			walkLeft.loadImage("JumpSpriteLeftTwo.png");
+			
+			jump.loadImage("JumpSpriteJumpTwo.png");
 			}
 		
 
@@ -51,6 +56,7 @@ public class JumpPlayer extends JumpObjects {
 		stand.update();
 		walkRight.update();
 		walkLeft.update();
+		jump.update();
 		
 		
 		
@@ -105,7 +111,7 @@ public class JumpPlayer extends JumpObjects {
 		if(animationSetOne == 0) {
 			g.drawImage(stand.currentImage, x, y, width, height, null);
 		}else if(animationSetOne == 1) {
-			g.drawImage(stand.currentImage, x, y, width, height, null);
+			g.drawImage(jump.currentImage, x, y, width, height+39, null);
 		}else if(animationSetOne == 2) {
 			g.drawImage(walkRight.currentImage, x, y, width, height, null);
 		}else if(animationSetOne == 3) {

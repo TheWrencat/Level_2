@@ -69,7 +69,7 @@ public class JumpObjectsManager {
 
 	public void manageEnemies() {
 		if (System.currentTimeMillis() - enemyTimer >= enemySpawnTime * 2) {
-			addObject(new JumpPlatforms(new Random().nextInt(JumpRunner.FRAME_WIDTH), 0, 50, 50));
+			addObject(new JumpPlatforms(new Random().nextInt(JumpRunner.FRAME_WIDTH), 0, 100, 25));
 			enemyTimer = System.currentTimeMillis();
 		}
 	}
