@@ -1,5 +1,8 @@
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Graphics;
+
+import javax.swing.JApplet;
 
 public class JumpPlayer extends JumpObjects {
 	JumpAnimation walkLeft = new JumpAnimation();
@@ -103,6 +106,8 @@ public class JumpPlayer extends JumpObjects {
 	void setPlatform(JumpPlatforms p) {
 		platform = p;
 	}
+	
+
 
 	void draw(Graphics g) {
 		g.setColor(playerColor);

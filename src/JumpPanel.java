@@ -1,3 +1,4 @@
+import java.applet.AudioClip;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -9,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+import javax.swing.JApplet;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -32,7 +34,10 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	int whoDied = 0;
 	// timer
 	Timer timer;
-	
+	 AudioClip gameOverSound = JApplet.newAudioClip(getClass().getResource("GameOverSound.wav"));
+	 AudioClip jumpSound = JApplet.newAudioClip(getClass().getResource("JumpSound.wav"));
+	 AudioClip jumpSoundTwo = JApplet.newAudioClip(getClass().getResource("JumpSoundTwo.wav"));
+	      
 	
 	
 	// Constructor
@@ -50,7 +55,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 		manager.addPlayers(player);
 		manager.addPlayers(playerTwo);
-		
+
 
 	}
 
@@ -131,6 +136,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		if(!player.isAlive || !playerTwo.isAlive) {
 			saveScoreOne = manager.scoreOne;
 			saveScoreTwo = manager.scoreTwo;
+			gameOverSound.play();
 		}
 		
 		
@@ -174,6 +180,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		}
 
 	}
+	
 
 	// Key Controls
 	@Override
@@ -190,6 +197,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 			player.ySpeed = -2;
 			player.inAir = true;
 			player.animationSetOne = 1;
+			jumpSound.play();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			player.xSpeed = +2;
@@ -207,6 +215,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 			playerTwo.ySpeed = -2;
 			playerTwo.inAir = true;
 			playerTwo.animationSetOne = 1;
+			jumpSoundTwo.play();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_D) {
 			playerTwo.xSpeed = +2;
@@ -231,6 +240,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_UP) {
 			player.ySpeed = 0;
 			player.animationSetOne = 0;
+			jumpSound.stop();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 			player.xSpeed = 0;
@@ -245,6 +255,7 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		if (e.getKeyCode() == KeyEvent.VK_W) {
 			playerTwo.ySpeed = 0;
 			playerTwo.animationSetOne = 0;
+			jumpSoundTwo.stop();
 		}
 		if (e.getKeyCode() == KeyEvent.VK_D) {
 			playerTwo.xSpeed = 0;

@@ -20,7 +20,8 @@ public class JumpRunner {
 		frame.setVisible(true);
 		frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        frame.requestFocusInWindow();
+        frame.setAutoRequestFocus(true);
 		// Keep this as last
 		panel.startGame();
 	}
