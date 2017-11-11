@@ -20,10 +20,10 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	JumpPlayer player;
 	JumpPlayer playerTwo;
 	JumpObjectsManager manager;
-	String imagePickerOne;
-	String imagePickerTwo;
+	//font
 	Font titleFont;
 	Font subFont;
+	//score
 	int saveScoreOne;
 	int saveScoreTwo;
 	// menu states
@@ -31,12 +31,17 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 	final int GAME_STATE = 1;
 	final int END_STATE = 2;
 	int currentState = MENU_STATE;
+	//Player death
 	int whoDied = 0;
 	// timer
 	Timer timer;
+	//audio
 	 AudioClip gameOverSound = JApplet.newAudioClip(getClass().getResource("GameOverSound.wav"));
 	 AudioClip jumpSound = JApplet.newAudioClip(getClass().getResource("JumpSound.wav"));
 	 AudioClip jumpSoundTwo = JApplet.newAudioClip(getClass().getResource("JumpSoundTwo.wav"));
+	 //images
+	 JumpAnimation player1 = new JumpAnimation();
+	 JumpAnimation player2 = new JumpAnimation();
 	      
 	
 	
@@ -55,6 +60,12 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 
 		manager.addPlayers(player);
 		manager.addPlayers(playerTwo);
+		//Menu Images
+		player1.loadImage("JumpSpriteStand.png");
+		player2.loadImage("JumpSpriteStandTwo.png");
+		player1.update();
+		player2.update();
+
 
 
 	}
@@ -71,13 +82,13 @@ public class JumpPanel extends JPanel implements ActionListener, KeyListener {
 		g.fillRect(0, 0, JumpRunner.FRAME_WIDTH, JumpRunner.FRAME_HEIGHT);
 		g.setColor(Color.GRAY);
 		g.setFont(titleFont);
-		g.drawString("Jump", 180, 200);
+		g.drawString("Jump Bots", 125, 200);
 		g.drawString("START GAME", 85, 250);
-		g.setColor(Color.PINK);
+		g.drawImage(player1.currentImage, 300, 700, 50, 50,  null);
+		g.drawImage(player2.currentImage, 200, 700, 50, 50, null);
 		
-		//g.drawImage(TwoTest, 300, 700, 50, 50, null);
-		g.setColor(Color.ORANGE);
-		//g.drawImage(walk.currentImage, 200, 700, 50, 50, null);
+		
+		
 	}
 
 	void drawGameState(Graphics g) {

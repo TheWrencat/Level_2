@@ -1,3 +1,4 @@
+/GameOverSound.wav
 /JumpAnimation.class
 /JumpObjects.class
 /JumpObjectsManager.class
@@ -5,6 +6,8 @@
 /JumpPlatforms.class
 /JumpPlayer.class
 /JumpRunner.class
+/JumpSound.wav
+/JumpSoundTwo.wav
 /JumpSpriteJump.png
 /JumpSpriteJumpTwo.png
 /JumpSpriteLeftTwo.png
@@ -14,8 +17,3 @@
 /JumpSpriteStandTwo.png
 /Platform.png
 /jumpSpriteLeft.png
-/JumpSound.mp3
-/GameOverSound.wav
-/JumpSound.wav
-/JumpSoundTwo.mp3
-/JumpSoundTwo.wav
