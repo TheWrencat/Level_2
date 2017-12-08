@@ -18,7 +18,7 @@ public class JumpPlatforms extends JumpObjects {
 		Platform.update();
 		y += ySpeed;
 
-		if (y >= 750) {
+		if (y >= 600) {
 			isAlive = false;
 		}
 	}

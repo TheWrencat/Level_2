@@ -97,9 +97,9 @@ public class JumpPlayer extends JumpObjects {
 			ySpeed += yGravity;
 		}
 
-		if (y >= 750) {
-			isAlive = false;
-		}
+//		if (y >= 750) {
+//			isAlive = false;
+//		}
 
 	}
 

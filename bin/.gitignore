@@ -2,10 +2,6 @@
 /JumpAnimation.class
 /JumpObjects.class
 /JumpObjectsManager.class
-/JumpPanel.class
-/JumpPlatforms.class
-/JumpPlayer.class
-/JumpRunner.class
 /JumpSound.wav
 /JumpSoundTwo.wav
 /JumpSpriteJump.png
@@ -17,3 +13,7 @@
 /JumpSpriteStandTwo.png
 /Platform.png
 /jumpSpriteLeft.png
+/JumpPanel.class
+/JumpPlatforms.class
+/JumpPlayer.class
+/JumpRunner.class
